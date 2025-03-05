@@ -1,0 +1,157 @@
+:root {
+    --primary-color: #007AFF;
+    --background-color: #f5f5f7;
+    --border-color: #d2d2d7;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--background-color);
+    color: #1d1d1f;
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+.converter-wrapper {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.input-section, .output-section {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    align-items: center;
+}
+
+select, button {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+select {
+    flex: 1;
+    padding: 8px;
+    cursor: pointer;
+    background-color: white;
+    transition: border-color 0.3s;
+}
+
+select:hover {
+    border-color: var(--primary-color);
+}
+
+button {
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button:hover {
+    background-color: var(--background-color);
+}
+
+#copy-btn {
+    margin-top: 0.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+}
+
+#copy-btn:hover {
+    opacity: 0.9;
+}
+
+.char-count {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* 添加选项说明样式 */
+select option {
+    padding: 8px;
+}
+
+/* 更新选项说明 */
+select option[value="gbk-encode"]::after,
+select option[value="gb2312-encode"]::after {
+    content: " - 中文编码";
+}
+
+/* 移除 MD5 和 SHA-1 的选项说明样式 */
+select option[value="md5"]::after,
+select option[value="sha1"]::after {
+    content: none;
+}
+
+/* 添加编码说明样式 */
+.encoding-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background-color: #f5f5f7;
+    border-radius: 6px;
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    .container {
+        margin: 1rem auto;
+    }
+    
+    .converter-wrapper {
+        padding: 1rem;
+    }
+} 
