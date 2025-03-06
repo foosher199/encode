@@ -7,6 +7,9 @@ const copyBtn = document.getElementById('copy-btn');
 const clearBtn = document.getElementById('clear-btn');
 const swapBtn = document.getElementById('swap-btn');
 
+// 在文件开头添加
+let currentLang = 'zh-CN';
+
 // 更新字符计数
 function updateCharCount() {
     charCount.textContent = inputText.value.length;
@@ -186,13 +189,90 @@ function convert() {
     outputText.value = result;
 }
 
-// 复制结果
+// 添加语言切换功能
+function switchLanguage(lang) {
+    currentLang = lang;
+    const t = translations[lang];
+    
+    // 更新页面文本
+    document.title = t.title;
+    document.querySelector('h1').textContent = t.title;
+    document.querySelector('label[for="input-text"]').textContent = t.inputLabel;
+    document.querySelector('label[for="output-text"]').textContent = t.outputLabel;
+    document.querySelector('#input-text').placeholder = t.inputPlaceholder;
+    document.querySelector('.char-count').firstChild.textContent = t.charCount;
+    document.querySelector('#copy-btn').textContent = t.copyButton;
+    
+    // 更新编码类型选项
+    const select = document.querySelector('#encode-type');
+    Array.from(select.options).forEach(option => {
+        const translatedText = t.encodingTypes[option.value];
+        if (translatedText) {
+            option.textContent = translatedText;
+        }
+    });
+    
+    // 更新按钮状态
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    
+    // 保存语言选择到本地存储
+    localStorage.setItem('preferred-language', lang);
+}
+
+// 添加语言切换按钮事件监听
+document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        switchLanguage(btn.dataset.lang);
+    });
+});
+
+// 获取用户的首选语言
+function getPreferredLanguage() {
+    // 首先检查本地存储中是否有保存的语言设置
+    const savedLang = localStorage.getItem('preferred-language');
+    if (savedLang && translations[savedLang]) {
+        return savedLang;
+    }
+    
+    // 检查浏览器语言设置
+    const browserLangs = navigator.languages || [navigator.language];
+    
+    // 遍历浏览器的语言列表
+    for (let lang of browserLangs) {
+        // 简化语言代码（例如 'zh-TW' -> 'zh'）
+        const simpleLang = lang.split('-')[0];
+        
+        // 检查完整的语言代码
+        if (translations[lang]) {
+            return lang;
+        }
+        
+        // 检查简化的语言代码
+        if (simpleLang === 'zh' && translations['zh-CN']) {
+            return 'zh-CN';
+        }
+    }
+    
+    // 如果没有匹配的语言，返回英语作为默认语言
+    return 'en';
+}
+
+// 修改页面加载时的语言初始化逻辑
+document.addEventListener('DOMContentLoaded', () => {
+    const preferredLang = getPreferredLanguage();
+    switchLanguage(preferredLang);
+});
+
+// 修改复制按钮的文本更新逻辑
 copyBtn.addEventListener('click', () => {
     outputText.select();
     document.execCommand('copy');
-    copyBtn.textContent = '已复制！';
+    const t = translations[currentLang];
+    copyBtn.textContent = t.copied;
     setTimeout(() => {
-        copyBtn.textContent = '复制结果';
+        copyBtn.textContent = t.copyButton;
     }, 2000);
 });
 
