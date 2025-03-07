@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KDHFCW5M');</script>
+    <!-- End Google Tag Manager -->
+    <title>编码转换工具</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/text-encoding@0.7.0/lib/encoding.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gbk.js@0.3.0/dist/gbk.min.js"></script>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDHFCW5M"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+    <div class="container">
+        <div class="language-switcher">
+            <button class="lang-btn" data-lang="zh-CN">中文</button>
+            <button class="lang-btn" data-lang="en">English</button>
+        </div>
+        <h1>编码转换工具</h1>
+        
+        <div class="converter-wrapper">
+            <div class="input-section">
+                <label for="input-text">输入文本</label>
+                <textarea id="input-text" placeholder="请输入要转换的文本..."></textarea>
+                <div class="char-count">字符数：<span id="char-count">0</span></div>
+            </div>
+
+            <div class="controls">
+                <select id="encode-type">
+                    <!-- 基础 URL 编码 -->
+                    <option value="url-encode">URL 编码 (保留特殊字符)</option>
+                    <option value="url-decode">URL 解码</option>
+                    <option value="url-utf8-encode">URL 编码 (UTF-8)</option>
+                    <option value="url-utf8-decode">URL 解码 (UTF-8)</option>
+                    <option value="escape-encode">Escape 编码</option>
+                    <option value="escape-decode">Unescape 解码</option>
+
+                    <!-- Base 编码 -->
+                    <option value="base64-encode">Base64 编码</option>
+                    <option value="base64-decode">Base64 解码</option>
+                    <option value="base32-encode">Base32 编码</option>
+                    <option value="base32-decode">Base32 解码</option>
+
+                    <!-- 中文编码 -->
+                    <option value="gbk-encode">GBK 编码</option>
+                    <option value="gbk-decode">GBK 解码</option>
+                    <option value="gb2312-encode">GB2312 编码</option>
+                    <option value="gb2312-decode">GB2312 解码</option>
+
+                    <!-- Unicode 相关 -->
+                    <option value="unicode-encode">Unicode 编码</option>
+                    <option value="unicode-decode">Unicode 解码</option>
+                    <option value="ascii-encode">ASCII 编码</option>
+                    <option value="ascii-decode">ASCII 解码</option>
+
+                    <!-- Web 相关 -->
+                    <option value="html-encode">HTML 实体编码</option>
+                    <option value="html-decode">HTML 实体解码</option>
+                    <option value="jwt-decode">JWT 解码</option>
+
+                    <!-- 其他 -->
+                    <option value="hex-encode">Hex 编码</option>
+                    <option value="hex-decode">Hex 解码</option>
+                </select>
+                <button id="swap-btn" title="交换输入输出">⇅</button>
+                <button id="clear-btn" title="清空">🗑️</button>
+            </div>
+
+            <div class="output-section">
+                <label for="output-text">转换结果</label>
+                <textarea id="output-text" readonly></textarea>
+                <button id="copy-btn">复制结果</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 
